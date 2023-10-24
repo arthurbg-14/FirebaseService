@@ -26,8 +26,8 @@ export class FirebaseService {
     return addDoc(colRef, item)
   }
 
-  addFile(file: File): [Promise<string>, Observable<UploadTaskSnapshot>] {
-    const storageRef = ref(this.storage, file.name)
+  addFile(file: File, path?: string): [Promise<string>, Observable<UploadTaskSnapshot>] {
+    const storageRef = ref(this.storage, path ?? file.name)
 
     const uploadTask = uploadBytesResumable(storageRef, file)
 

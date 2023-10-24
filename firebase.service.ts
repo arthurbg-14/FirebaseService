@@ -1,4 +1,4 @@
-import { getStorage, ref, UploadTaskSnapshot } from '@angular/fire/storage';
+import { getStorage, UploadTaskSnapshot, ref, deleteObject } from '@angular/fire/storage';
 import { Injectable, inject } from '@angular/core';
 import { Firestore, doc,
   collection, query, DocumentReference, QuerySnapshot,
@@ -101,5 +101,10 @@ export class FirebaseService {
     }
 
     return batch.commit()
+  }
+
+  async deleteRef(path: string): Promise<void> {
+    const storageRef = ref(this.storage, path)
+    return deleteObject(storageRef)
   }
 }
